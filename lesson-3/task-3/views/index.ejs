@@ -1,0 +1,8 @@
+<%- include('components/html-top') -%> <%- include('components/header') -%>
+<h1><%= title %></h1>
+<% if (typeof user !== 'undefined' && user) { %>
+<p>Welcome, <%= user %>!</p>
+<% } else { %>
+<p>Welcome, guest!</p>
+<% } %>
+<%- include('components/html-btm') -%>

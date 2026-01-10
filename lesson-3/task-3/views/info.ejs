@@ -1,0 +1,15 @@
+<%- include('components/html-top') -%> <%- include('components/header') -%>
+<h1><%= title %></h1>
+<% if (info.length && info) { %>
+<ul>
+  <% info.forEach((item) => { %>
+  <li>
+    <strong><%= item.title %></strong> : <% if (item.link && item.link !== 'This is info about me') { %>
+    <a href="<%= item.link %>"><%= item.link %></a>
+    <% } else { %> <%= item.description %> <% } %>
+  </li>
+  <% }); %>
+</ul>
+<% } else { %>
+<p>No information found!</p>
+<% } %> <%- include('components/html-btm') -%>

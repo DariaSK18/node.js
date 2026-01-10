@@ -1,0 +1,11 @@
+<%- include('components/html-top') -%> <%- include('components/header') -%>
+<h1><%= title %></h1>
+<% if (typeof goals !== 'undefined' && goals) { %>
+<ul>
+  <% goals.forEach((goal) => { %>
+  <li><strong><%= goal.title %></strong> : <%= goal.description %></li>
+  <% }); %>
+</ul>
+<% } else { %>
+<p>No goals yet!</p>
+<% } %> <%- include('components/html-btm') -%>
