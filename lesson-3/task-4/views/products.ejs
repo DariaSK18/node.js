@@ -1,0 +1,21 @@
+<%- include('components/html-top') -%> <%- include('components/header') -%>
+<h1>Products</h1>
+<% if (products.length) { %>
+<table>
+  <tr>
+    <th>Title</th>
+    <th>Amount</th>
+    <th>Price</th>
+  </tr>
+  <% products.forEach((prod) => { %>
+  <tr>
+    <td><%= prod.title %></td>
+    <td><%= prod.amount %></td>
+    <td>$<%= prod.price %></td>
+  </tr>
+  <% }); %>
+</table>
+<% } else { %>
+<p>No products found!</p>
+  <% } %>
+<%- include('components/html-btm') -%>
