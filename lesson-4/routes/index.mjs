@@ -5,8 +5,8 @@ const router = Router()
 
 router.use(booksRouter)
 
-// router.get('/', (req, res) => {
-// res.render('index', { title: 'Express' })
-// })
+router.get('/', (req, res) => {
+    res.render('index', { title: 'Express' })
+})
 
 export default router
