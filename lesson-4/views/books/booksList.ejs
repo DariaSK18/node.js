@@ -1,0 +1,10 @@
+<%- include('../components/html-top') -%>
+    <h1>Book list</h1>
+    <button>Add book</button>
+    <ul>
+    <% books.forEach(book => { %>
+        <li>
+            <a href='/book/<%= book.id %>'> <%= book.title %></a> <button>Edit</button> <button>Delete</button>
+        </li>
+    <% }) %></ul>
+<%- include('../components/html-btm') -%>
