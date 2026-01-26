@@ -32,13 +32,30 @@ class BookController {
     }
     static updateBook(req, res) {
         try {
-            const id = req.params
+            const id = req.params.id
             const bookData = req.body
+            // console.log('----book data', bookData, '----id', id);
             Book.updateBook(id, bookData)
             res.redirect('/books')
         } catch (error) {
             res.status(500).render('error', {
                 message: 'Error updating book',
+                error
+            })
+        }
+    }
+    static getBookForm(req, res) {
+        try {
+            const book = req.params.id ? Book.getBookById(req.params.id) : {}
+            const backUrl = req.get('referer') || '/'
+            res.render('books/bookForm', {
+                title: 'Book Form',
+                book,
+                backUrl
+            })
+        } catch (error) {
+            res.status(500).render('error', {
+                message: 'Error loading form',
                 error
             })
         }
@@ -55,9 +72,9 @@ class BookController {
             })
         }
     }
-    static deleteeBook(req, res) {
+    static deleteBook(req, res) {
         try {
-            const id = req.params.id
+            const id = req.body.id
             Book.deleteBookById(id)
             res.status(204).end()
         } catch (error) {
