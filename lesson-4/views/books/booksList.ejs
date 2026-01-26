@@ -1,10 +1,13 @@
 <%- include('../components/html-top') -%>
+<%- include('../components/header', {activePage: 'books'}) -%>
     <h1>Book list</h1>
-    <button>Add book</button>
+    <!-- <button>Add book</button> -->
     <ul>
     <% books.forEach(book => { %>
         <li>
-            <a href='/book/<%= book.id %>'> <%= book.title %></a> <button>Edit</button> <button>Delete</button>
+            <a href='/book/<%= book.id %>'> <%= book.title %></a>
+            <a href='/update-book/<%= book.id %>'><button>Edit</button></a>
+            <button onclick="deleteBook('<%= book.id %>')">Delete</button>
         </li>
     <% }) %></ul>
 <%- include('../components/html-btm') -%>
