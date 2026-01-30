@@ -1,13 +1,24 @@
 <%- include('../components/html-top') -%>
 <%- include('../components/header', {activePage: 'books'}) -%>
-    <h1>Book list</h1>
-    <!-- <button>Add book</button> -->
-    <ul>
-    <% books.forEach(book => { %>
-        <li>
-            <a href='/book/<%= book.id %>'> <%= book.title %></a>
-            <a href='/update-book/<%= book.id %>'><button>Edit</button></a>
-            <button onclick="deleteBook('<%= book.id %>')">Delete</button>
-        </li>
-    <% }) %></ul>
+<main class="container">
+        <h1 class="main-title">Books list</h1>
+        <form method="get" class="form-search">
+            Filters: 
+                <input type="text" name="title" placeholder="Search a book by title">
+                <input type="number" min="868" name="year" placeholder="Year filter">
+            <button class="card-btn" type="submit">Apply</button>
+        </form>
+        <ul class="book-list">
+        <% books.forEach(book => { %>
+            <li class="book-card">
+                <h3 class="book-title"><a href='/book/<%= book.id %>'> <%= book.title %></a></h3>
+                <p>by <%= book.author %></p>
+                <p><%= book.year %> year</p>
+                <div class="card-btns">
+                    <a href='/update-book/<%= book.id %>'><button class="card-btn">Edit</button></a>
+                    <button class="card-btn btn-del" onclick="deleteBook('<%= book.id %>')">Delete</button>
+                </div>
+            </li>
+        <% }) %></ul>
+</main>
 <%- include('../components/html-btm') -%>

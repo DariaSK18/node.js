@@ -1,5 +1,27 @@
 <%- include('components/html-top') -%>
 <%- include('components/header', {activePage: 'home'}) -%>
-    <h1><%= title %></h1>
-    <p>Welcome <%= title %></p>
+<main class="container">
+        <h1 class="main-title">My book tracker</h1>
+        <h4>A simple place to keep your reading life in order.</h4>
+        <section>
+            <ul>
+                <li>Keep track of books you’ve read</li>
+                <li>Remember your favourite stories</li>
+                <li>Plan what to read next</li>
+            </ul>
+        </section>
+        <section class="about-philosophy">
+        <h2>Why this app</h2>
+        <p>
+            Reading is not a competition.
+            This tracker doesn’t measure speed or goals —
+            it simply helps you keep your reading journey organised.
+        </p>
+    
+        <blockquote>
+            “A book is a dream that you hold in your hands.”
+            <span>— Neil Gaiman</span>
+        </blockquote>
+    </section>
+</main>
 <%- include('components/html-btm') -%>

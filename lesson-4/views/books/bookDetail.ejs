@@ -1,5 +1,7 @@
 <%- include('../components/html-top') -%>
 <%- include('../components/header', {activePage: ''}) -%>
-    <h1>Book detail</h1>
-    <%= book.title %> - <%= book.author %> - <%= book.year %>
+    <main class="container">
+        <h1 class="main-title">Book detail</h1>
+        <%= book.title %> - <%= book.author %> - <%= book.year %>
+    </main>
 <%- include('../components/html-btm') -%>
