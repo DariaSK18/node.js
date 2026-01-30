@@ -3,7 +3,11 @@ import Book from "../models/bookModel.mjs";
 class BookController {
     static getAllBooks(req, res) {
         try {
-            const booksList = Book.loadBooksList()
+            const { title, year } = req.query
+            let booksList = Book.loadBooksList()
+
+            if (title) { booksList = booksList.filter(book => book.title.toLowerCase().includes(title.toLowerCase())) }
+            if (year) { booksList = booksList.filter(book => Number(book.year) === Number(year))}
             res.render('books/booksList', {
                 title: 'Books List',
                 books: booksList,
