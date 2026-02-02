@@ -8,9 +8,12 @@
                 <input type="number" min="868" name="year" placeholder="Year filter">
             <button class="card-btn" type="submit">Apply</button>
         </form>
-        <ul class="book-list">
+        <% if(books.length === 0) { %>
+            <p>No books were found!</p>
+            <% } %>
+        <div class="book-list">
         <% books.forEach(book => { %>
-            <li class="book-card">
+            <div class="book-card">
                 <h3 class="book-title"><a href='/book/<%= book.id %>'> <%= book.title %></a></h3>
                 <p>by <%= book.author %></p>
                 <p><%= book.year %> year</p>
@@ -18,7 +21,8 @@
                     <a href='/update-book/<%= book.id %>'><button class="card-btn">Edit</button></a>
                     <button class="card-btn btn-del" onclick="deleteBook('<%= book.id %>')">Delete</button>
                 </div>
-            </li>
-        <% }) %></ul>
+            </div>
+        <% }) %>
+    </div>
 </main>
 <%- include('../components/html-btm') -%>

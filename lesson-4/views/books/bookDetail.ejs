@@ -2,6 +2,16 @@
 <%- include('../components/header', {activePage: ''}) -%>
     <main class="container">
         <h1 class="main-title">Book detail</h1>
-        <%= book.title %> - <%= book.author %> - <%= book.year %>
+        <!-- <%= book.title %> - <%= book.author %> - <%= book.year %>
+<hr> -->
+        <div class="book-card">
+                <h3 class="book-title"><a href='/book/<%= book.id %>'> <%= book.title %></a></h3>
+                <p>by <%= book.author %></p>
+                <p><%= book.year %> year</p>
+                <div class="card-btns">
+                    <a href='/update-book/<%= book.id %>'><button class="card-btn">Edit</button></a>
+                    <button class="card-btn btn-del" onclick="deleteBook('<%= book.id %>')">Delete</button>
+                </div>
+            </div>
     </main>
 <%- include('../components/html-btm') -%>

@@ -2,21 +2,14 @@
 <%- include('../components/header', {activePage: 'form'}) -%>
 <main class="container">
         <h1 class="main-title"><%= book.id ? 'Update the book' : 'Add new book' %></h1>
-        <form action="<%= book.id ? '/update-book/' + book.id : '/create-book' %>" method="post">
-            <label>
-                Title
+        <form action="<%= book.id ? '/update-book/' + book.id : '/create-book' %>" method="post" class="form-add">
                 <input type="text" placeholder="Title of the book" name="title" value="<%= book.title %>">
-            </label>
-            <label>
-                Author
                 <input type="text" placeholder="Author of the book" name="author" value="<%= book.author %>">
-            </label>
-            <label>
-                Issue Date
                 <input type="number" placeholder="Date of issue" name="year" min="868" value="<%= book.year %>">
-            </label>
-            <button><%= book.id ? 'Update' : 'Add' %></button>
-           <a href="<%= backUrl %>">Cancel</a>
+            <div class="card-btns">
+                <button class="card-btn"><%= book.id ? 'Update' : 'Add' %></button>
+               <a href="<%= backUrl %>" class="card-btn">Cancel</a>
+            </div>
         </form>
 </main>
 <%- include('../components/html-btm') -%>
