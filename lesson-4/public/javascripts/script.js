@@ -7,7 +7,8 @@ async function deleteBook(id) {
         })
         console.log(res.status)
         if(res.ok) {
-            location.reload()
+            // location.reload()
+            window.location.href = '/books'
         }
     } catch (error) {
         console.log(error);
