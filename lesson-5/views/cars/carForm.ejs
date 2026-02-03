@@ -1,0 +1,15 @@
+<%- include('../components/html-top') -%>
+<%- include('../components/header', {activePage: 'form'}) -%>
+car form
+<main class="container">
+        <h1 class="main-title"><%= car.id ? 'Update the car' : 'Add your car' %></h1>
+        <form action="<%= car.id ? '/update-car/' + car.id : '/create-car' %>" method="post">
+                <input type="text" placeholder="Model of the car" name="model" value="<%= car.model %>">
+                <input type="number" placeholder="Date of issue" name="year" min="1700" value="<%= car.year %>">
+            <div>
+                <button><%= car.id ? 'Update' : 'Add' %></button>
+               <a href="<%= backUrl %>">Cancel</a>
+            </div>
+        </form>
+</main>
+<%- include('../components/html-btm') -%>
