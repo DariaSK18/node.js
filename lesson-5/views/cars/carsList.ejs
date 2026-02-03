@@ -1,0 +1,75 @@
+<%- include('../components/html-top') -%>
+<%- include('../components/header', {activePage: 'cars'}) -%>
+<main class="container">
+        <h1 class="main-title">
+Welcome to AutoTrade</h1>
+        <section>
+            <form method="get">
+            Filters: 
+            <label>
+                Make:
+                <select name="make">
+                    <option value="all" selected>All cars</option>
+                    <% cars.forEach(car => { %>
+                    <option value="<%= car.make %>"><%= car.make %></option>
+                    <% }) %>
+                </select>
+            </label>
+            <label>
+                Model:
+                <select name="model" disabled>
+                    <option value="default" selected disabled>default</option>
+                    <% cars.forEach(car => { %>
+                    <option value="<%= car.model %>"><%= car.model %></option>
+                    <% }) %>
+                </select>
+            </label>
+                <input type="number" min="1700" max="<%= maxYear %>" name="minYear" placeholder="Min year">
+                <input type="number" min="1700" max="<%= maxYear %>" name="maxYear" placeholder="Max year">
+                <input type="number" min="0" max="1000000000" name="price" placeholder="Max price">
+                <fieldset>
+  <legend>Choose your fuel type:</legend>
+                <label>
+                    <input type="checkbox" name="fuelType" value="petrol">
+                    Petrol
+                </label>
+                <label>
+                    <input type="checkbox" name="fuelType" value="diesel">
+                    Diesel
+                </label>
+                <label>
+                    <input type="checkbox" name="fuelType" value="electric">
+                    Electric
+                </label>
+                </fieldset>
+            <button type="submit">Apply</button>
+        </form>
+        </section>
+        <section>
+            <h3>Featured Stock</h3>
+        <% filteredList.forEach(car => { %>
+                <img src="<%= car.image %>" alt="Car">
+                <div>
+                    <h3><%= car.make %></h3>
+                    <h4><%= car.model %></h4>
+                    <p><%= car.regPlate %></p>
+                </div>
+                <p><%= car.description %></p>
+                <div>
+                    <div><%= car.year %></div>
+                    <div><%= car.mileage %></div>
+                    <div><%= car.fuelType %></div>
+                    <div><%= car.color %></div>
+                </div>
+                <div><%= car.price %></div>
+                <a href='/car/<%= car.id %>'>View this vehicle</a>
+        <% }) %>
+    </section>
+    <section>
+            <% if(filteredList.length === 0) { %>
+            <h3>No cars were found!</h3>
+            <% } %>
+        </section>
+    </div>
+</main>
+<%- include('../components/html-btm') -%>
