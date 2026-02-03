@@ -1,0 +1,67 @@
+[
+  {
+    "id": 1,
+    "make": "Toyota",
+    "model": "Corolla",
+    "year": 2018,
+    "regPlate": "AB18 XYZ",
+    "image": "",
+    "description": "Reliable and fuel-efficient sedan, ideal for city driving and long trips.",
+    "color": "White",
+    "mileage": 52000,
+    "fuelType": "Petrol",
+    "price": 14500
+  },
+  {
+    "id": 2,
+    "make": "BMW",
+    "model": "3 Series",
+    "year": 2020,
+    "regPlate": "CD20 ABC",
+    "image": "",
+    "description": "Sporty sedan with excellent performance and high comfort.",
+    "color": "Black",
+    "mileage": 34000,
+    "fuelType": "Diesel",
+    "price": 24900
+  },
+  {
+    "id": 3,
+    "make": "Audi",
+    "model": "A4",
+    "year": 2019,
+    "regPlate": "EF19 QWE",
+    "image": "",
+    "description": "Premium car with modern design and advanced technologies.",
+    "color": "Grey",
+    "mileage": 41000,
+    "fuelType": "Petrol",
+    "price": 21900
+  },
+  {
+    "id": 4,
+    "make": "Volkswagen",
+    "model": "Golf",
+    "year": 2017,
+    "regPlate": "GH17 RTY",
+    "image": "",
+    "description": "Compact hatchback, perfect for both city and highway driving.",
+    "color": "Blue",
+    "mileage": 60000,
+    "fuelType": "Petrol",
+    "price": 12900
+  },
+  {
+    "id": 5,
+    "make": "Tesla",
+    "model": "Model 3",
+    "year": 2021,
+    "regPlate": "EV21 TES",
+    "image": "",
+    "description": "Electric car with autopilot features and long driving range.",
+    "color": "Red",
+    "mileage": 22000,
+    "fuelType": "Electric",
+    "price": 32900
+  }
+]
