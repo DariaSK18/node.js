@@ -8,19 +8,10 @@ Welcome to AutoTrade</h1>
             Filters: 
             <label>
                 Make:
-                <select name="make">
+                <select name="make" id="makeSelect">
                     <option value="all" selected>All cars</option>
                     <% cars.forEach(car => { %>
                     <option value="<%= car.make %>"><%= car.make %></option>
-                    <% }) %>
-                </select>
-            </label>
-            <label>
-                Model:
-                <select name="model" disabled>
-                    <option value="default" selected disabled>default</option>
-                    <% cars.forEach(car => { %>
-                    <option value="<%= car.model %>"><%= car.model %></option>
                     <% }) %>
                 </select>
             </label>
@@ -48,7 +39,8 @@ Welcome to AutoTrade</h1>
         <section>
             <h3>Featured Stock</h3>
         <% filteredList.forEach(car => { %>
-                <img src="<%= car.image %>" alt="Car">
+                <img src="<%= car.images ? car.images[0] : '/images/no-photo-car.jpg '%>" alt="Car" style="height: 160px">
+                <p>Pictures: <%= car.images?.length > 0 ? car.images.length : 0 %></p>
                 <div>
                     <h3><%= car.make %></h3>
                     <h4><%= car.model %></h4>
@@ -62,6 +54,10 @@ Welcome to AutoTrade</h1>
                     <div><%= car.color %></div>
                 </div>
                 <div><%= car.price %></div>
+                <div>
+                    <a href='/update-car/<%= car.id %>'><button>Edit</button></a>
+                    <button onclick="deleteCar('<%= car.id %>')">Delete</button>
+                </div>
                 <a href='/car/<%= car.id %>'>View this vehicle</a>
         <% }) %>
     </section>
