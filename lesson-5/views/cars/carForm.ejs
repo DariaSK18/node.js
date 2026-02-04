@@ -1,11 +1,33 @@
 <%- include('../components/html-top') -%>
 <%- include('../components/header', {activePage: 'form'}) -%>
-car form
 <main class="container">
         <h1 class="main-title"><%= car.id ? 'Update the car' : 'Add your car' %></h1>
-        <form action="<%= car.id ? '/update-car/' + car.id : '/create-car' %>" method="post">
-                <input type="text" placeholder="Model of the car" name="model" value="<%= car.model %>">
-                <input type="number" placeholder="Date of issue" name="year" min="1700" value="<%= car.year %>">
+        <form action="<%= car.id ? '/update-car/' + car.id : '/create-car' %>" method="post" enctype="multipart/form-data">
+            <input type="text" placeholder="Make of the car" name="make" value="<%= car.make %>" autocomplete="off">
+            <input type="text" placeholder="Model of the car" name="model" value="<%= car.model %>" autocomplete="off">
+            <input type="number" placeholder="Date of issue" name="year" min="1700" value="<%= car.year %>" autocomplete="off">
+            <input type="text" placeholder="Registration plate of the car" name="regPlate" value="<%= car.regPlate %>" autocomplete="off">
+            <input type="text" placeholder="Color of the car" name="color" value="<%= car.color %>" autocomplete="off">
+            <input type="text" placeholder="Mileage of the car" name="mileage" value="<%= car.mileage %>" autocomplete="off">
+            <input type="number" placeholder="Price for the car" name="price" min="0" value="<%= car.price %>" autocomplete="off">
+            <fieldset>
+                <legend>Fuel type:</legend>
+                <label>
+                    <input type="radio" name="fuelType" value="petrol" <% if (car && car.fuelType === 'petrol') { %>checked<% } %>>
+                    Petrol
+                </label>
+                <label>
+                    <input type="radio" name="fuelType" value="diesel" <% if (car && car.fuelType === 'diesel') { %>checked<% } %>>
+                    Diesel
+                </label>
+                <label>
+                    <input type="radio" name="fuelType" value="electric" <% if (car && car.fuelType === 'electric') { %>checked<% } %>>
+                    Electric
+                </label>
+            </fieldset>
+            <input type="file" name="images" accept="image/*" multiple value="<%= car.images %>" onchange="handleImgInput(event)">
+            <img id="carImg" src="<%= car.images ? `/${car.images[0]}` : '/images/no-photo-car.jpg' %>" alt="Car" style="height: 160px">
+            <textarea cols="50" rows="10" name="description" placeholder="Describe the car"><%= car.description  || '' %></textarea>
             <div>
                 <button><%= car.id ? 'Update' : 'Add' %></button>
                <a href="<%= backUrl %>">Cancel</a>
