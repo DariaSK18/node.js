@@ -1,5 +1,6 @@
 import Car from "../models/carModel.mjs";
-import { currentYear } from "../utils/getFullYear.js";
+import { currentYear } from "../utils/getFullYear.mjs";
+import { deleteFileFromDir } from "../utils/deleteFile.mjs";
 
 class CarController {
     static getAllCars(req, res) {
@@ -23,7 +24,6 @@ class CarController {
                     filteredList = filteredList.filter(car => car.fuelType.toLowerCase().includes(fuelType.toLowerCase()))
                 }
             }
-
             res.render('cars/carsList', {
                 title: 'Cars List',
                 cars: carsList,
@@ -32,7 +32,7 @@ class CarController {
             })
         } catch (error) {
             res.status(500).render('error', {
-                message: 'Error loading books',
+                message: 'Error loading cars',
                 error
             })
         }
@@ -47,24 +47,34 @@ class CarController {
             })
         } catch (error) {
             res.status(500).render('error', {
-                message: 'Error loading book',
+                message: 'Error loading car',
                 error
             })
         }
     }
     static updateCar(req, res) {
-        // try {
-        //     const id = req.params.id
-        //     const bookData = req.body
-        //     // console.log('----book data', bookData, '----id', id);
-        //     Book.updateBook(id, bookData)
-        //     res.redirect('/books')
-        // } catch (error) {
-        //     res.status(500).render('error', {
-        //         message: 'Error updating book',
-        //         error
-        //     })
-        // }
+        try {
+            const id = req.params.id
+            const carData = req.body
+            console.log('---req.files', req.files.length);
+            // console.log('---carData.images', carData.images);
+            if (req.files.length > 0) {
+                const car = Car.getCarById(id)
+                if (car.images) {
+                    car.images.forEach(img => deleteFileFromDir('uploads', img))
+                }
+                carData.images = []
+                req.files.forEach(file => carData.images.push(file.filename))
+            }
+            // console.log('---carData', carData);
+            Car.updateCar(id, carData)
+            res.redirect('/cars')
+        } catch (error) {
+            res.status(500).render('error', {
+                message: 'Error updating car',
+                error
+            })
+        }
     }
     static getCarForm(req, res) {
         try {
@@ -85,23 +95,39 @@ class CarController {
     static createCar(req, res) {
         try {
             const carData = req.body
+            // console.log(req.files, '----req');
+            if (req.files) {
+                carData.images = []
+                req.files.forEach(file => carData.images.push(file.filename))
+            }
+            // console.log('----carData', carData);
             Car.addNewCar(carData)
             res.redirect('/cars')
         } catch (error) {
             res.status(500).render('error', {
-                message: 'Error creating book',
+                message: 'Error creating car',
                 error
             })
         }
     }
     static deleteCar(req, res) {
         try {
+            // console.log('---del car controller');
             const id = req.body.id
+            const car = Car.getCarById(id)
+            // console.log('---car', car);
+            if (car.images) {
+                // console.log('---car.images', car.images);
+                car.images.forEach(img => {
+                    //    console.log('---img', img);
+                    deleteFileFromDir('uploads', img)
+                })
+            }
             Car.deleteCarById(id)
             res.status(204).end()
         } catch (error) {
             res.status(500).render('error', {
-                message: 'Error deleting book',
+                message: 'Error deleting car',
                 error
             })
         }
