@@ -164,6 +164,7 @@ textarea {
     }
 }
 /* --- cards --- */
+/* --- card cars list --- */
 .cards-container {
     display: flex;
     flex-wrap: wrap;
@@ -178,28 +179,20 @@ textarea {
     max-width: 18rem;
     width: 100%;
     align-self: stretch;
-    /* padding: 1rem; */
     border-radius: 0.5rem;
     overflow: hidden;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     position: relative;
+    .img-wrapper {
+        border-radius: 1rem;
+        overflow: hidden;
+    }
     img {
         width: 100%;
         height: 100%;
         object-fit: fill;
-    }
-    .card__img-count {
-        position: absolute;
-        top: 0.5rem;
-        right: 0.5rem;
-        background: hsl(0, 0%, 100%, 0.1);
-        backdrop-filter: blur(0.125rem);
-        padding: 0.5rem;
-        border-radius: 0.5rem;
-        box-shadow: inset 0 0 0.5rem 0.06rem rgba(255, 255, 255, 0.3);
-        text-shadow: 0 0 0.2rem rgb(255, 255, 255);
     }
     .card__content {
         display: flex;
@@ -208,39 +201,53 @@ textarea {
         padding: 1rem;
         flex-grow: 1;
         justify-content: space-between;
-        .card__car,
-        .card__btns {
-            display: flex;
-            gap: 1rem;
-            justify-content: space-around;
-        }
-        .card__description {
-            flex-grow: 1;
-        }
-        .card__details {
-            display: flex;
-            gap: 0.5rem;
-            justify-content: space-around;
-            div {
-                background: hsl(0, 0%, 100%, 0.1);
-                backdrop-filter: blur(0.125rem);
-                padding: 0.5rem;
-                border-radius: 0.5rem;
-                box-shadow: inset 0 0 0.5rem 0.06rem rgba(255, 255, 255, 0.3);
-            }
-        }
-        .btn-edit,
-        .btn-del {
-            text-align: center;
-            width: 100%;
-            padding: 0.5rem;
-            border-radius: 1rem;
-            border: 0.1rem solid var(--accent-color);
-        }
-        .btn-del {
-            color: red;
-        }
     }
+}
+.card__car,
+.card__btns {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    width: 100%;
+}
+.card__details {
+    display: flex;
+    gap: 0.5rem;
+    justify-content: space-around;
+    div {
+        background: hsl(0, 0%, 100%, 0.1);
+        backdrop-filter: blur(0.125rem);
+        padding: 0.5rem;
+        border-radius: 0.5rem;
+        box-shadow: inset 0 0 0.5rem 0.06rem rgba(255, 255, 255, 0.3);
+    }
+}
+.btn-edit,
+.btn-del {
+    text-align: center;
+    width: 100%;
+    max-width: 7rem;
+    padding: 0.5rem;
+    border-radius: 1rem;
+    border: 0.1rem solid var(--accent-color);
+}
+.btn-del {
+    color: red;
+}
+/* --- card detail --- */
+.card-detail {
+    background: hsl(0, 0%, 100%, 0.1);
+    backdrop-filter: blur(0.125rem);
+    box-shadow: inset 0 0 0.5rem 0.06rem rgba(255, 255, 255, 0.3);
+    width: 100%;
+    max-width: 55rem;
+    border-radius: 0.5rem;
+    display: flex;
+    gap: 1rem;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 0;
 }
 /* --- car form styles --- */
 .add-car-form {
@@ -285,26 +292,66 @@ textarea {
         }
     }
 }
-.add-car-form > input, .add-car-form > textarea  {
-        width: 100%;
-    }
+.add-car-form > input,
+.add-car-form > textarea {
+    width: 100%;
+}
 
 /* --- slider styles --- */
-swiper-container {
-    width: 100%;
-    height: 25rem;
+.swiper-list {
+    height: 13rem;
+    width: 18rem;
+    color: white;
+    .swiper-slide img {
+        object-fit: fill;
+    }
 }
-swiper-slide {
+.swiper-detail {
+    height: 25rem;
+    width: 90vw;
+    max-width: 55rem;
+    color: white;
+    .swiper-slide img {
+        object-fit: contain;
+    }
+}
+.swiper-slide {
     text-align: center;
-    font-size: 18px;
-    background: #444;
+    height: 100%;
+    width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
+    border-radius: 1rem;
+    overflow: hidden;
 }
-swiper-slide img {
+
+.swiper-slide img {
     display: block;
     width: 100%;
     height: 100%;
-    object-fit: cover;
+    /* object-fit: cover; */
+}
+.swiper-pagination-fraction {
+    max-width: 20%;
+    background: hsl(0, 0%, 100%, 0.1);
+    backdrop-filter: blur(0.125rem);
+    padding: 0.5rem;
+    border-radius: 0.5rem;
+    box-shadow: inset 0 0 0.5rem 0.06rem rgba(255, 255, 255, 0.3);
+    text-shadow: 0 0 0.2rem rgb(0, 0, 0);
+}
+.swiper-horizontal > .swiper-pagination-bullets,
+.swiper-pagination-bullets.swiper-pagination-horizontal,
+.swiper-pagination-custom,
+.swiper-pagination-fraction {
+    left: 50% !important;
+    transform: translateX(-50%) !important;
+}
+.swiper-pagination {
+    position: absolute;
+    text-align: center;
+    transform: translateZ(-50%);
+    transition: opacity 0.3s;
+    z-index: 10;
 }
