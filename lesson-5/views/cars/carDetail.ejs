@@ -2,59 +2,34 @@
 <%- include('../components/header', {activePage: ''}) -%>
     <main class="container">
         <h1 class="main-title">Car detail</h1>
-        <div>
+        <div class="card-detail">
             <h3><bold><%= car.make %></bold> <span><%= car.model %></span></h3>
-            <!-- <swiper-container class="mySwiper" init="false" loop="true"> -->
+            <% if (car.images && car.images.length) { %>
+            <div class="swiper mySwiper swiper-detail">
+              <div class="swiper-wrapper">
                 <% car.images.forEach(img => { %>
-    <!-- <swiper-slide> -->
-      <img src="<%= `/${img}` %>" alt="car" style="width: 10rem">
-    <!-- </swiper-slide> -->
-    <% }) %>
-  <!-- </swiper-container> -->
+                <div class="swiper-slide"><img src="<%= `/${img}` %>" alt="car"></div>
+              <% }) %>
+              </div>
+              <div class="swiper-button-next"></div>
+              <div class="swiper-button-prev"></div>
+              <div class="swiper-pagination"></div>
+            </div>
+            <% } else { %>
+              <div class="img-wrapper"><img src="/images/no-photo-car.jpg" alt="Car"></div>
+            <% } %>
             <p><%= car.description %></p>
-                <div>
+                <div class="card__details">
                     <div><%= car.year %></div>
                     <div><%= car.mileage %></div>
                     <div><%= car.fuelType %></div>
                     <div><%= car.color %></div>
                 </div>
-                <div><%= car.price %></div>
-                <div>
-                    <a href='/update-car/<%= car.id %>'><button>Edit</button></a>
-                    <button onclick="deleteCar('<%= car.id %>')">Delete</button>
+                <div>$ <%= car.price %></div>
+                <div class="card__btns">
+                    <a href='/update-car/<%= car.id %>' class="btn-edit"><button>Edit</button></a>
+                    <button onclick="deleteCar('<%= car.id %>')" class="btn-del">Delete</button>
                 </div>
         </div>
     </main>
-    <script src="https://cdn.jsdelivr.net/npm/swiper@12/swiper-element-bundle.min.js"></script>
-
-  <script>
-    const swiperEl = document.querySelector('swiper-container')
-    Object.assign(swiperEl, {
-      slidesPerView: 1,
-      spaceBetween: 10,
-      pagination: {
-        clickable: true,
-      },
-      breakpoints: {
-        "@0.00": {
-          slidesPerView: 1,
-          spaceBetween: 10,
-        },
-        "@0.75": {
-          slidesPerView: 2,
-          spaceBetween: 20,
-        },
-        "@1.00": {
-          slidesPerView: 3,
-          spaceBetween: 40,
-        },
-        "@1.50": {
-          slidesPerView: 4,
-          spaceBetween: 50,
-        },
-      },
-    });
-
-    swiperEl.initialize();
-  </script>
 <%- include('../components/html-btm') -%>

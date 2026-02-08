@@ -44,8 +44,20 @@ Welcome to AutoTrade</h1>
         <div class="cards-container">
             <% filteredList.forEach(car => { %>
                     <div class="card">
-                        <img src="<%= car.images ? car.images[0] : '/images/no-photo-car.jpg '%>" alt="Car" style="height: 160px">
-                        <p class="card__img-count"><%= car.images?.length > 0 ? `1/${car.images.length}` : 0 %></p>
+                         <div class="swiper mySwiper swiper-list">
+    <div class="swiper-wrapper">
+        <% if (car.images && car.images.length) { %>
+      <% car.images.forEach(img => { %>
+      <div class="swiper-slide"><img src="<%= `/${img}` %>" alt="car"></div>
+     <% }) %>
+      <% } else { %>
+        <div class="img-wrapper"><img src="/images/no-photo-car.jpg" alt="Car"></div>
+        <% } %>
+    </div>
+    <div class="swiper-button-next"></div>
+    <div class="swiper-button-prev"></div>
+    <div class="swiper-pagination"></div>
+  </div>
                         <div class="card__content">
                             <h3><%= car.make %></h3>
                             <div class="card__car">
