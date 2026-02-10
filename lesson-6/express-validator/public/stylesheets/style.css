@@ -95,6 +95,10 @@ textarea {
     border-radius: 0.5rem;
 }
 
+.errors {
+    color: red;
+}
+
 /* --- home styles --- */
 
 .section-btm {
