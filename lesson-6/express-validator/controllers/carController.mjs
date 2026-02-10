@@ -1,6 +1,7 @@
 import Car from "../models/carModel.mjs";
 import { currentYear } from "../utils/getFullYear.mjs";
 import { deleteFileFromDir } from "../utils/deleteFile.mjs";
+import { validationResult, matchedData } from "express-validator";
 
 class CarController {
     static getAllCars(req, res) {
@@ -8,6 +9,17 @@ class CarController {
             const { make, model, minYear, maxYear, price, fuelType } = req.query
             const carsList = Car.loadCarsList()
             let filteredList = carsList
+            const errors = validationResult(req)
+            // console.log(errors);
+
+            if (!errors.isEmpty()) {
+                return res.render('cars/carsList', {
+                    title: 'Cars List',
+                    cars: carsList,
+                    filteredList: filteredList,
+                    errors: errors.array() || [],
+                })
+            }
             if (make && make !== 'all') { filteredList = filteredList.filter(car => car.make.toLowerCase().includes(make.toLowerCase())) }
             if (model) { filteredList = filteredList.filter(car => car.model.toLowerCase().includes(model.toLowerCase())) }
 
@@ -28,7 +40,7 @@ class CarController {
                 title: 'Cars List',
                 cars: carsList,
                 filteredList: filteredList,
-                maxYear: currentYear
+                errors: errors.array() || [],
             })
         } catch (error) {
             res.status(500).render('error', {
@@ -55,8 +67,21 @@ class CarController {
     static updateCar(req, res) {
         try {
             const id = req.params.id
-            const carData = req.body
-            console.log('---req.files', req.files.length);
+            const carData = matchedData(req)
+            const errorsInputs = {}
+            const errors = validationResult(req)
+            if (!errors.isEmpty()) {
+                errors.array().forEach(err => {
+                    errorsInputs[err.path] = err.msg
+                })
+                return res.render('cars/carForm', {
+                    title: 'Car Form',
+                    car: { ...carData, id },
+                    errors: errors.array(),
+                    errorsInputs: errorsInputs,
+                })
+            }
+            // console.log('---req.files', req.files.length);
             // console.log('---carData.images', carData.images);
             if (req.files.length > 0) {
                 const car = Car.getCarById(id)
@@ -79,11 +104,11 @@ class CarController {
     static getCarForm(req, res) {
         try {
             const car = req.params.id ? Car.getCarById(req.params.id) : {}
-            const backUrl = req.get('referer') || '/'
             res.render('cars/carForm', {
                 title: 'Car Form',
                 car,
-                backUrl
+                errors: null,
+                errorsInputs: null,
             })
         } catch (error) {
             res.status(500).render('error', {
@@ -94,7 +119,22 @@ class CarController {
     }
     static createCar(req, res) {
         try {
-            const carData = req.body
+            const carData = matchedData(req)
+            const errors = validationResult(req)
+            // console.log(errors);
+            const errorsInputs = {}
+
+            if (!errors.isEmpty()) {
+                errors.array().forEach(err => {
+                    errorsInputs[err.path] = err.msg
+                })
+                return res.render('cars/carForm', {
+                    title: 'Car Form',
+                    car: carData,
+                    errors: errors.array(),
+                    errorsInputs: errorsInputs,
+                })
+            }
             // console.log(req.files, '----req');
             if (req.files) {
                 carData.images = []
