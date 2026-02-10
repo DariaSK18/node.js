@@ -1,0 +1,35 @@
+<%- include('../components/html-top') -%>
+<%- include('../components/header', {activePage: ''}) -%>
+    <main class="container">
+        <h1 class="main-title">Car detail</h1>
+        <div class="card-detail">
+            <h3><bold><%= car.make %></bold> <span><%= car.model %></span></h3>
+            <% if (car.images && car.images.length) { %>
+            <div class="swiper mySwiper swiper-detail">
+              <div class="swiper-wrapper">
+                <% car.images.forEach(img => { %>
+                <div class="swiper-slide"><img src="<%= `/${img}` %>" alt="car"></div>
+              <% }) %>
+              </div>
+              <div class="swiper-button-next"></div>
+              <div class="swiper-button-prev"></div>
+              <div class="swiper-pagination"></div>
+            </div>
+            <% } else { %>
+              <div class="img-wrapper"><img src="/images/no-photo-car.jpg" alt="Car"></div>
+            <% } %>
+            <p><%= car.description %></p>
+                <div class="card__details">
+                    <div><%= car.year %></div>
+                    <div><%= car.mileage %></div>
+                    <div><%= car.fuelType %></div>
+                    <div><%= car.color %></div>
+                </div>
+                <div>$ <%= car.price %></div>
+                <div class="card__btns">
+                    <a href='/update-car/<%= car.id %>' class="btn-edit"><button>Edit</button></a>
+                    <button onclick="deleteCar('<%= car.id %>')" class="btn-del">Delete</button>
+                </div>
+        </div>
+    </main>
+<%- include('../components/html-btm') -%>
