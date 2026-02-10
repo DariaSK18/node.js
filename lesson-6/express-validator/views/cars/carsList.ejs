@@ -7,16 +7,27 @@ Welcome to AutoTrade</h1>
             <form method="get" class="form form-filter">
                 <strong>Filters:</strong>
                 <div class="filters">
+                    <div>
+                        <% if(errors?.length !== 0) { %>
+                            <ul class="errors">
+                                <% errors.forEach(err => { %>
+                                    <li><%= err.msg %></li>
+                                <% }) %>
+                            </ul>
+                        <% } %>
+                    </div>
                     <div class="filters__inputs">
                         <select name="make" id="makeSelect">
                             <option value="all" selected>All cars</option>
-                            <% cars.forEach(car => { %>
-                                <option value="<%= car.make %>"><%= car.make %></option>
+                            <% const makes = new Set()
+                            cars.forEach(car => makes.add(car.make)) %>
+                            <% makes.forEach(make => { %>
+                                <option value="<%= make %>"><%= make %></option>
                             <% }) %>
                         </select>
-                        <input type="number" min="1700" max="<%= maxYear %>" name="minYear" placeholder="Min year">
-                        <input type="number" min="1700" max="<%= maxYear %>" name="maxYear" placeholder="Max year">
-                        <input type="number" min="0" max="1000000000" name="price" placeholder="Max price">
+                        <input type="number" name="minYear" placeholder="Min year">
+                        <input type="number" name="maxYear" placeholder="Max year">
+                        <input type="number" name="price" placeholder="Max price">
                     </div>
                     <div class="filters__fieldset">
                         <fieldset>
@@ -66,10 +77,18 @@ Welcome to AutoTrade</h1>
                             </div>
                             <p class="card__description"><%= car.description %></p>
                             <div class="card__details">
+                                <% if(car.year) { %>
                                 <div><%= car.year %></div>
+                                <% } %>
+                                <% if(car.mileage) { %>
                                 <div><%= car.mileage %></div>
+                                <% } %>
+                                <% if(car.fuelType) { %>
                                 <div><%= car.fuelType %></div>
+                                <% } %>
+                                <% if(car.color) { %>
                                 <div><%= car.color %></div>
+                                <% } %>
                             </div>
                             <div>$ <%= car.price %></div>
                             <div class="card__btns">
