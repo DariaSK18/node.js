@@ -55,8 +55,8 @@ class CarController {
     static updateCar(req, res) {
         try {
             const id = req.params.id
-            const carData = req.body
-            console.log('---req.files', req.files.length);
+            const carData = req.validatedData
+            // console.log('---req.files', req.files.length);
             // console.log('---carData.images', carData.images);
             if (req.files.length > 0) {
                 const car = Car.getCarById(id)
@@ -79,11 +79,10 @@ class CarController {
     static getCarForm(req, res) {
         try {
             const car = req.params.id ? Car.getCarById(req.params.id) : {}
-            const backUrl = req.get('referer') || '/'
             res.render('cars/carForm', {
                 title: 'Car Form',
                 car,
-                backUrl
+                errors: []
             })
         } catch (error) {
             res.status(500).render('error', {
@@ -94,7 +93,7 @@ class CarController {
     }
     static createCar(req, res) {
         try {
-            const carData = req.body
+            const carData = req.validatedData
             // console.log(req.files, '----req');
             if (req.files) {
                 carData.images = []
