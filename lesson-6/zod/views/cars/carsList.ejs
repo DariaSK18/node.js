@@ -66,10 +66,18 @@ Welcome to AutoTrade</h1>
                             </div>
                             <p class="card__description"><%= car.description %></p>
                             <div class="card__details">
+                                <% if(car.year) { %>
                                 <div><%= car.year %></div>
+                                <% } %>
+                                <% if(car.mileage) { %>
                                 <div><%= car.mileage %></div>
+                                <% } %>
+                                <% if(car.fuelType) { %>
                                 <div><%= car.fuelType %></div>
+                                <% } %>
+                                <% if(car.color) { %>
                                 <div><%= car.color %></div>
+                                <% } %>
                             </div>
                             <div>$ <%= car.price %></div>
                             <div class="card__btns">
