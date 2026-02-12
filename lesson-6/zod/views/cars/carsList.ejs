@@ -20,7 +20,12 @@ Welcome to AutoTrade</h1>
                         <select name="make" id="makeSelect">
                             <option value="all" selected>All cars</option>
                             <% cars.forEach(car => { %>
-                                <option value="<%= car.make %>"><%= car.make %></option>
+                                <option value="all" selected>All cars</option>
+                            <% const makes = new Set()
+                            cars.forEach(car => makes.add(car.make)) %>
+                            <% makes.forEach(make => { %>
+                                <option value="<%= make %>"><%= make %></option>
+                            <% }) %>
                             <% }) %>
                         </select>
                         <input type="number" name="minYear" placeholder="Min year">
