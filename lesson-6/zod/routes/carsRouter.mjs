@@ -1,12 +1,12 @@
 import { Router } from 'express'
 import CarController from "../controllers/carController.mjs";
 import uploadImg from "../middleware/uploadImg.mjs";
-import { formValidationMiddleware } from "../middleware/validationMiddleware.js";
-import { formValidationSchema } from "../utils/validationSchema.js";
+import { filterValidationMiddleware, formValidationMiddleware } from "../middleware/validationMiddleware.js";
+import { filterValidationSchema, formValidationSchema } from "../utils/validationSchema.js";
 
 const router = Router()
 
-router.get('/cars', CarController.getAllCars)
+router.get('/cars', filterValidationMiddleware(filterValidationSchema), CarController.getAllCars)
 router.get('/car/:id', CarController.getCarById)
 
 router.post('/update-car/:id',
