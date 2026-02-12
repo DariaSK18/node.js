@@ -2,7 +2,7 @@
 <%- include('../components/header', {activePage: 'form'}) -%>
 <main class="container">
         <h1 class="main-title"><%= car.id ? 'Update the car' : 'Add your car' %></h1>
-        <div>
+        <!-- <div>
             <% if(errors?.length) { %>
                 <h3>Errors:</h3>
                 <ul class="errors">
@@ -11,7 +11,7 @@
                     <% }) %>
                 </ul>
             <% } %>
-        </div>
+        </div> -->
         <form action="<%= car.id ? '/update-car/' + car.id : '/create-car' %>" method="post" enctype="multipart/form-data" class="form add-car-form">
             <h3>Fill the form</h3>
             <% if(!car.id){ %>
