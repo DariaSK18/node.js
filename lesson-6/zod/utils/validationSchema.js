@@ -20,3 +20,28 @@ export const formValidationSchema = z.object({
     price: z.coerce.number({ message: 'This field is required.' }).int({ message: 'Must be an integer.' }).positive({ message: 'Incorrect price.' }),
     description: z.string().trim().optional()
 })
+
+export const filterValidationSchema = z.object({
+    minYear: z.string().trim().optional().refine(val => !val || /^\d{4}$/.test(val), { message: 'Incorrect year. Must be 4 digits.' }).refine(val => {
+        if (!val) return true
+        const year = Number(val)
+        return year >= 1884 && year <= currentYear
+    }, { message: `Incorrect year. Min: 1884.` }),
+    maxYear: z.string().trim().optional().refine(val => !val || /^\d{4}$/.test(val), { message: 'Incorrect year. Must be 4 digits.' }).refine(val => {
+        if (!val) return true
+        const year = Number(val)
+        return year >= 1884 && year <= currentYear
+    }, { message: `Incorrect year. Max: ${currentYear}` }),
+    price: z.preprocess(
+        val => {
+            if (val === '' || val === undefined) return undefined
+            return Number(val)
+        },
+        z.number({ message: 'Must be an integer.' }).int().positive({ message: 'Incorrect price.' }).optional()
+    )
+})
+.refine(data => {
+    if(data.minYear && data.maxYear) return data.maxYear >= data.minYear
+    return true
+}, {message: 'Max year must be greater than min year'}
+)
