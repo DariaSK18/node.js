@@ -28,7 +28,8 @@ class CarController {
                 title: 'Cars List',
                 cars: carsList,
                 filteredList: filteredList,
-                maxYear: currentYear
+                maxYear: currentYear,
+                errors: []
             })
         } catch (error) {
             res.status(500).render('error', {
