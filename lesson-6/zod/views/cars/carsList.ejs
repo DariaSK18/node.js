@@ -19,13 +19,10 @@ Welcome to AutoTrade</h1>
                     <div class="filters__inputs">
                         <select name="make" id="makeSelect">
                             <option value="all" selected>All cars</option>
-                            <% cars.forEach(car => { %>
-                                <option value="all" selected>All cars</option>
                             <% const makes = new Set()
-                            cars.forEach(car => makes.add(car.make)) %>
+                            cars.forEach(car => makes.add(car.make.toLowerCase())) %>
                             <% makes.forEach(make => { %>
                                 <option value="<%= make %>"><%= make %></option>
-                            <% }) %>
                             <% }) %>
                         </select>
                         <input type="number" name="minYear" placeholder="Min year">
