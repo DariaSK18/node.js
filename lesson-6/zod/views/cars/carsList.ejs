@@ -7,6 +7,15 @@ Welcome to AutoTrade</h1>
             <form method="get" class="form form-filter">
                 <strong>Filters:</strong>
                 <div class="filters">
+                    <div>
+                        <% if(errors?.length !== 0) { %>
+                            <ul class="errors">
+                                <% errors.forEach(err => { %>
+                                    <li><%= err %></li>
+                                <% }) %>
+                            </ul>
+                        <% } %>
+                    </div>
                     <div class="filters__inputs">
                         <select name="make" id="makeSelect">
                             <option value="all" selected>All cars</option>
@@ -14,9 +23,9 @@ Welcome to AutoTrade</h1>
                                 <option value="<%= car.make %>"><%= car.make %></option>
                             <% }) %>
                         </select>
-                        <input type="number" min="1700" max="<%= maxYear %>" name="minYear" placeholder="Min year">
-                        <input type="number" min="1700" max="<%= maxYear %>" name="maxYear" placeholder="Max year">
-                        <input type="number" min="0" max="1000000000" name="price" placeholder="Max price">
+                        <input type="number" name="minYear" placeholder="Min year">
+                        <input type="number" name="maxYear" placeholder="Max year">
+                        <input type="number" name="price" placeholder="Max price">
                     </div>
                     <div class="filters__fieldset">
                         <fieldset>
