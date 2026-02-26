@@ -1,0 +1,74 @@
+<%- include('../components/html-top') -%>
+<%- include('../components/header', {activePage: 'form'}) -%>
+<main class="container">
+        <h1 class="main-title"><%= car.id ? 'Update the car' : 'Add your car' %></h1>
+        <!-- <div>
+            <% if(errors?.length) { %>
+                <h3>Errors:</h3>
+                <ul class="errors">
+                    <% errors.forEach(err => { %>
+                        <li><%= err.msg %></li>
+                    <% }) %>
+                </ul>
+            <% } %>
+        </div> -->
+        <form action="<%= car.id ? '/update-car/' + car.id : '/create-car' %>" method="post" enctype="multipart/form-data" class="form add-car-form">
+            <h3>Fill the form</h3>
+            <% if(!car.id){ %>
+            <p>* required fields</p>
+            <% } %>
+            <input type="text" placeholder="Make of the car*" name="make" value="<%= car.make %>" autocomplete="off">
+            <% if(errorsInputs?.make) { %>
+                <p class="errors"><%= errorsInputs.make %></p>
+            <% } %>
+            <input type="text" placeholder="Model of the car*" name="model" value="<%= car.model %>" autocomplete="off">
+            <% if(errorsInputs?.model) { %>
+                <p class="errors"><%= errorsInputs.model %></p>
+            <% } %>
+            <input type="number" placeholder="Date of issue*" name="year" value="<%= car.year %>" autocomplete="off">
+            <% if(errorsInputs?.year) { %>
+                <p class="errors"><%= errorsInputs.year %></p>
+            <% } %>
+            <input type="text" placeholder="Registration plate of the car*" name="regPlate" value="<%= car.regPlate %>" autocomplete="off">
+            <% if(errorsInputs?.regPlate) { %>
+                <p class="errors"><%= errorsInputs.regPlate %></p>
+            <% } %>
+            <input type="text" placeholder="Color of the car" name="color" value="<%= car.color %>" autocomplete="off">
+            <% if(errorsInputs?.color) { %>
+                <p class="errors"><%= errorsInputs.color %></p>
+            <% } %>
+            <input type="number" placeholder="Mileage of the car" name="mileage" value="<%= car.mileage %>" autocomplete="off">
+            <% if(errorsInputs?.mileage) { %>
+                <p class="errors"><%= errorsInputs.mileage %></p>
+            <% } %>
+            <input type="number" placeholder="Price for the car*" name="price" value="<%= car.price %>" autocomplete="off">
+            <% if(errorsInputs?.price) { %>
+                <p class="errors"><%= errorsInputs.price %></p>
+            <% } %>
+            <div class="fieldset__inputs">
+                <fieldset>
+                    <legend>Fuel type:</legend>
+                        <label>
+                            <input type="radio" name="fuelType" value="petrol" <% if (car && car.fuelType === 'petrol') { %>checked<% } %>>
+                            Petrol
+                        </label>
+                        <label>
+                            <input type="radio" name="fuelType" value="diesel" <% if (car && car.fuelType === 'diesel') { %>checked<% } %>>
+                            Diesel
+                        </label>
+                        <label>
+                            <input type="radio" name="fuelType" value="electric" <% if (car && car.fuelType === 'electric') { %>checked<% } %>>
+                            Electric
+                        </label>
+                </fieldset>
+            </div>
+            <input type="file" name="images" accept="image/*" multiple value="<%= car.images %>" onchange="handleImgInput(event)">
+            <img id="carImg" src="<%= car.images && car.images.length !== 0 ? `/${car.images[0]}` : '/images/no-photo-car.jpg' %>" alt="Car" style="height: 160px">
+            <textarea cols="50" rows="10" name="description" placeholder="Describe the car"><%= car.description  || '' %></textarea>
+            <div class="form-btns">
+                <button class="form-btn"><%= car.id ? 'Update' : 'Add' %></button>
+               <a href="/cars" class="form-btn">Cancel</a>
+            </div>
+        </form>
+</main>
+<%- include('../components/html-btm') -%>
