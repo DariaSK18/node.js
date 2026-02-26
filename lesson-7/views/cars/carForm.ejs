@@ -7,7 +7,7 @@
                 <h3>Errors:</h3>
                 <ul class="errors">
                     <% errors.forEach(err => { %>
-                        <li><%= err.msg %></li>
+                        <li><%= err.message %></li>
                     <% }) %>
                 </ul>
             <% } %>
@@ -18,33 +18,40 @@
             <p>* required fields</p>
             <% } %>
             <input type="text" placeholder="Make of the car*" name="make" value="<%= car.make %>" autocomplete="off">
-            <% if(errorsInputs?.make) { %>
-                <p class="errors"><%= errorsInputs.make %></p>
-            <% } %>
+            <% errors.forEach(err => { 
+                if(err.path[0] === 'make') { %>
+                    <p class="errors"><%= err.message %></p>
+            <% } }) %>
             <input type="text" placeholder="Model of the car*" name="model" value="<%= car.model %>" autocomplete="off">
-            <% if(errorsInputs?.model) { %>
-                <p class="errors"><%= errorsInputs.model %></p>
-            <% } %>
+            <% errors.forEach(err => { 
+                if(err.path[0] === 'model') { %>
+                    <p class="errors"><%= err.message %></p>
+            <% } }) %>
             <input type="number" placeholder="Date of issue*" name="year" value="<%= car.year %>" autocomplete="off">
-            <% if(errorsInputs?.year) { %>
-                <p class="errors"><%= errorsInputs.year %></p>
-            <% } %>
+            <% errors.forEach(err => { 
+                if(err.path[0] === 'year') { %>
+                    <p class="errors"><%= err.message %></p>
+            <% } }) %>
             <input type="text" placeholder="Registration plate of the car*" name="regPlate" value="<%= car.regPlate %>" autocomplete="off">
-            <% if(errorsInputs?.regPlate) { %>
-                <p class="errors"><%= errorsInputs.regPlate %></p>
-            <% } %>
+            <% errors.forEach(err => { 
+                if(err.path[0] === 'regPlate') { %>
+                    <p class="errors"><%= err.message %></p>
+            <% } }) %>
             <input type="text" placeholder="Color of the car" name="color" value="<%= car.color %>" autocomplete="off">
-            <% if(errorsInputs?.color) { %>
-                <p class="errors"><%= errorsInputs.color %></p>
-            <% } %>
-            <input type="number" placeholder="Mileage of the car" name="mileage" value="<%= car.mileage %>" autocomplete="off">
-            <% if(errorsInputs?.mileage) { %>
-                <p class="errors"><%= errorsInputs.mileage %></p>
-            <% } %>
+            <% errors.forEach(err => { 
+                if(err.path[0] === 'color') { %>
+                    <p class="errors"><%= err.message %></p>
+            <% } }) %>
+            <input type="text" placeholder="Mileage of the car" name="mileage" value="<%= car.mileage %>" autocomplete="off">
+            <% errors.forEach(err => { 
+                if(err.path[0] === 'mileage') { %>
+                    <p class="errors"><%= err.message %></p>
+            <% } }) %>
             <input type="number" placeholder="Price for the car*" name="price" value="<%= car.price %>" autocomplete="off">
-            <% if(errorsInputs?.price) { %>
-                <p class="errors"><%= errorsInputs.price %></p>
-            <% } %>
+            <% errors.forEach(err => { 
+                if(err.path[0] === 'price') { %>
+                    <p class="errors"><%= err.message %></p>
+            <% } }) %>
             <div class="fieldset__inputs">
                 <fieldset>
                     <legend>Fuel type:</legend>

@@ -1,5 +1,15 @@
+<%- include('components/html-top') -%>
+<%- include('components/header', {activePage: 'home'}) -%>
 <main class="container">
     <h1><%= message %></h1>
     <h2><%= error.status %></h2>
     <pre><%= error.stack %></pre>
+    <div>
+        <h1>Сталася помилка</h1>
+        <p><%= error.message || 'Internal Server Error' %></p>
+        <% if (error.stack) { %>
+        <pre><%= error.stack %></pre>
+        <% } %>
+    </div>
 </main>
+<%- include('components/html-btm') -%>

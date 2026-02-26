@@ -11,7 +11,7 @@ Welcome to AutoTrade</h1>
                         <% if(errors?.length !== 0) { %>
                             <ul class="errors">
                                 <% errors.forEach(err => { %>
-                                    <li><%= err.msg %></li>
+                                    <li><%= err %></li>
                                 <% }) %>
                             </ul>
                         <% } %>
@@ -20,7 +20,7 @@ Welcome to AutoTrade</h1>
                         <select name="make" id="makeSelect">
                             <option value="all" selected>All cars</option>
                             <% const makes = new Set()
-                            cars.forEach(car => makes.add(car.make)) %>
+                            cars.forEach(car => makes.add(car.make.toLowerCase())) %>
                             <% makes.forEach(make => { %>
                                 <option value="<%= make %>"><%= make %></option>
                             <% }) %>
